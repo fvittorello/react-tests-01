@@ -5,6 +5,27 @@ import './App.css';
 import { Form } from '../Form/Form';
 import { TodoList } from '../TodoList/TodoList';
 
+//	Functions
+const filterHandler = (status, todos, setFilteredTodos) => {
+	switch (status) {
+		case 'completed':
+			setFilteredTodos(todos.filter((todo) => todo.completed === true));
+			break;
+
+		case 'uncompleted':
+			setFilteredTodos(todos.filter((todo) => todo.completed === false));
+			break;
+
+		default:
+			setFilteredTodos(todos);
+			break;
+	}
+};
+
+const saveTolocal = (todos) => {
+	localStorage.setItem('todos', JSON.stringify(todos));
+};
+
 const App = () => {
 	//States
 	const [inputText, setInputText] = useState('');
@@ -19,31 +40,9 @@ const App = () => {
 
 	//Use Effect
 	useEffect(() => {
-		filterHandler();
-		saveTolocal();
+		filterHandler(status, todos, setFilteredTodos);
+		saveTolocal(todos);
 	}, [todos, status]);
-
-	//Functions
-	const filterHandler = () => {
-		switch (status) {
-			case 'completed':
-				setFilteredTodos(todos.filter((todo) => todo.completed === true));
-				break;
-
-			case 'uncompleted':
-				setFilteredTodos(todos.filter((todo) => todo.completed === false));
-				break;
-
-			default:
-				setFilteredTodos(todos);
-				break;
-		}
-	};
-
-	//Save to local
-	const saveTolocal = () => {
-		localStorage.setItem('todos', JSON.stringify(todos));
-	};
 
 	const getlocalTodos = () => {
 		if (localStorage.getItem('todos') === null) {
