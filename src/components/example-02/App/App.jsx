@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 //	Importing Components
-import { Form } from '../Form/Form';
-import { TodoList } from '../TodoList/TodoList';
+import { Form } from 'components/example-02/Form/Form';
+import { TodoList } from 'components/example-02/TodoList/TodoList';
 
 //	Functions
 const filterHandler = (status, todos, setFilteredTodos) => {

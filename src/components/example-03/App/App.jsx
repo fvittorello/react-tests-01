@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const api_key = '6b2b22be';
 const app_id = '96ca863a0bdf2e850114ba0293136806';
-
-const example = `https://api.edamam.com/search?q=chicken&app_id=${app_id}&app_key=${api_key}`;
+let search = 'chicken';
 
 const App = () => {
+	const getRecipes = async () => {
+		const response = await fetch(`https://api.edamam.com/search?q=${search}&app_id=${app_id}&app_key=${api_key}`, {
+			method: 'GET',
+			headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+		});
+		const data = await response.json();
+		console.log(data);
+	};
+
+	useEffect(() => {
+		getRecipes();
+	}, []);
+
 	return (
 		<div className='App'>
-			<h1>Hello Example 03</h1>
+			<form className='search-form'>
+				<input type='text' className='search-bar' />
+				<button type='submit' className='search-button'>
+					Search
+				</button>
+			</form>
 		</div>
 	);
 };

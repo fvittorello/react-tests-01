@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { SearchBox } from '../example-01/search-box';
-import { CardList } from '../example-01/card-list';
+import { SearchBox } from 'components/example-01/SearchBox/SearchBox';
+import { CardList } from 'components/example-01/CardList/CardList';
 
 import './App.css';
 
@@ -11,7 +11,7 @@ const App = () => {
 	function getMonsters() {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then((response) => response.json())
-			.then((users) => setMonsters({ users }))
+			.then((users) => setMonsters(users))
 			.catch((err) => console.log(err));
 	}
 
